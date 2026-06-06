@@ -7,7 +7,7 @@ function App() {
     // 画面全体を覆うベースの背景色と高さを指定
     <div className="min-h-screen bg-base-200 p-4 md:p-8">
       {/* カレンダーの最大幅を制限し、中央に配置 */}
-      <div className="max-w-[95vw] mx-auto h-[95vh]">
+      <div className="max-w-[95vw] mx-auto h-[90vh]">
         <CalendarView />
       </div>
     </div>

@@ -18,9 +18,9 @@ export default function CalendarGrid({ currentDate, calendarDays, selectedDate, 
 
       {/* カレンダーのマス目 */}
       <div className="grid grid-cols-7 grid-rows-6 gap-1 flex-1">
-        {calendarDays.map((date) => (
+        {calendarDays.map((date, index) => (
           <DayCell 
-            key={date.toISOString()} 
+            key={index} 
             date={date} 
             currentDate={currentDate}
             isSelected={selectedDate?.getTime() === date.getTime()}
