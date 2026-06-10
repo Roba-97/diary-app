@@ -20,18 +20,20 @@ export default function CalendarView() {
   };
 
   return (
-    <div className="flex flex-col h-full bg-base-100 p-4 rounded-box shadow-sm">
+    <div className="w-full h-full flex flex-col bg-base-100">
       <CalendarHeader 
         currentDate={currentDate} 
         onPrev={prevMonth} 
         onNext={nextMonth} 
       />
-      <CalendarGrid 
-        currentDate={currentDate}
-        calendarDays={calendarDays}
-        selectedDate={selectedDate}
-        onSelectDate={setSelectedDate}
-      />
+      <div className="flex-grow mt-4 w-full h-full">
+        <CalendarGrid 
+          currentDate={currentDate}
+          calendarDays={calendarDays}
+          selectedDate={selectedDate}
+          onSelectDate={setSelectedDate}
+        />
+      </div>
       <DiaryPopup 
         selectedDate={selectedDate} 
         onClose={handleClosePopup} 

@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 
 export default function CalendarHeader({ currentDate, onPrev, onNext }) {
   return (
-    <div className="flex items-center justify-start gap-3 mb-4">
+    <div className="flex items-center justify-start gap-3 mb-4 pl-14 lg:pl-0">
       <h2 className="text-3xl font-bold p-2">
         {format(currentDate, 'yyyy年 MM月')}
       </h2>

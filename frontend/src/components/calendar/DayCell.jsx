@@ -19,7 +19,7 @@ export default function DayCell({ date, currentDate, isSelected, onClick }) {
       onClick={onClick}
       className={`
         p-2 border border-base-200 rounded-md cursor-pointer transition-colors
-        flex flex-col gap-1 overflow-hidden
+        flex flex-col gap-1 overflow-hidden w-full h-full
         ${!isCurrentMonth ? 'opacity-40 bg-base-200/50' : 'bg-base-100 hover:bg-base-200'}
         ${isSelected ? 'ring-2 ring-primary ring-inset' : ''}
       `}
