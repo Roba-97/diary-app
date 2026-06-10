@@ -1,4 +1,3 @@
-// src/components/calendar/CalendarGrid.jsx
 import React from 'react';
 import DayCell from './DayCell';
 

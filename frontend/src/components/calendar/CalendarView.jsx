@@ -1,4 +1,3 @@
-// src/components/calendar/CalendarView.jsx
 import React from 'react';
 import { useCalendar } from '../../hooks/useCalendar';
 import CalendarHeader from './CalendarHeader';

@@ -1,4 +1,3 @@
-// src/components/calendar/DayCell.jsx
 import React from 'react';
 import { format, isSameMonth, isToday } from 'date-fns';
 
