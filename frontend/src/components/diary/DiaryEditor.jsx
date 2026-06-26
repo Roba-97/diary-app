@@ -1,12 +1,14 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+import TagInput from '../tag/TagInput';
 
 export default function DiaryEditor({ date, initialData, onCancel }) {
   // 日記本文の状態管理
   const [body, setBody] = useState(initialData ? initialData.body : '');
+  const [selectedTags, setSelectedTags] = useState(initialData && initialData.tags ? initialData.tags : []); 
 
-  // ※重要：別の日の日付をクリックした等で initialData が外から変わった場合、エディタ内の表示も確実に更新させるための処理
   useEffect(() => {
     setBody(initialData ? initialData.body : '');
+    setSelectedTags(initialData && initialData.tags ? initialData.tags : []);
   }, [initialData]);
 
   // 保存ボタンが押された時の処理
@@ -16,7 +18,8 @@ export default function DiaryEditor({ date, initialData, onCancel }) {
     // TODO: 今後はここでRails APIへの保存処理（useEntriesフックなど）を呼び出します
     console.log('保存するデータ:', { 
       date: date, 
-      body: body 
+      body: body,
+      tags: selectedTags
     });
     
     // 保存処理の完了を想定してモーダルを閉じる
@@ -25,6 +28,9 @@ export default function DiaryEditor({ date, initialData, onCancel }) {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-4">
+      {/* タグ入力UI */}
+      <TagInput selectedTags={selectedTags} onChange={setSelectedTags} />
+      
       {/* 本文入力エリア */}
       <div className="form-control w-full">
         <textarea
@@ -34,11 +40,6 @@ export default function DiaryEditor({ date, initialData, onCancel }) {
           onChange={(e) => setBody(e.target.value)}
           required
         ></textarea>
-      </div>
-
-      {/* 将来的にここへタグ選択UI（TagInput.jsx）を組み込みます */}
-      <div className="text-sm text-base-content/60 border border-dashed border-base-300 p-2 text-center rounded">
-        ※ここにタグ選択UIが追加されます
       </div>
 
       {/* アクションボタン */}
