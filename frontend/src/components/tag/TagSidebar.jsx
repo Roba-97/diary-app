@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import TagCreateModal from './TagCreateModal';
 
 // 【仮のモックデータ】将来的にAPIから取得するタグデータ（紐づく日記の数を含む）
 const mockTags = [
@@ -11,8 +12,8 @@ const mockTags = [
 ];
 
 export default function TagSidebar() {
-  // 親タグの開閉状態を管理するState（デフォルトは全て閉じた状態）
-  const [openParents, setOpenParents] = useState([]);
+  const [openParents, setOpenParents] = useState([]);    // 親タグの開閉状態（デフォルトは全て閉じた状態）
+  const [isModalOpen, setIsModalOpen] = useState(false);  // モーダルの開閉状態
 
   // ツリー構造構築用のヘルパー関数
   const rootTags = mockTags.filter(tag => tag.parent_id === null);
@@ -20,9 +21,13 @@ export default function TagSidebar() {
 
   // 開閉のトグル処理
   const toggleParent = (id) => {
-    setOpenParents(prev =>
-      prev.includes(id) ? prev.filter(pId => pId !== id) : [...prev, id]
-    );
+    setOpenParents(prev => prev.includes(id) ? prev.filter(pId => pId !== id) : [...prev, id]);
+  };
+
+  // タグ作成時のモック処理（後ほどAPI連携に置き換えます）
+  const handleCreateTag = (newTagData) => {
+    console.log("新規作成するタグデータ:", newTagData);
+    // TODO: ここでRails APIにPOSTリクエストを送信する処理を追加します
   };
 
   return (
@@ -32,7 +37,8 @@ export default function TagSidebar() {
           <span className="font-bold text-lg">タグ一覧</span>
         </div>
         <div className="mt-4">
-          <button className="btn btn-sm w-full bg-transparent border-2 border-primary text-primary hover:bg-primary hover:border-primary hover:text-primary-content hover:shadow-none transition-all duration-200">
+          <button onClick={() => setIsModalOpen(true)}
+            className="btn btn-sm w-full bg-transparent border-2 border-primary text-primary hover:bg-primary hover:border-primary hover:text-primary-content hover:shadow-none transition-all duration-200">
             ＋ 新規タグ作成
           </button>
         </div>
@@ -94,6 +100,14 @@ export default function TagSidebar() {
           })}
         </ul>
       </div>
+      
+      {/* 新規作成モーダルの呼び出し */}
+      <TagCreateModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        onCreate={handleCreateTag}
+        parentTags={rootTags} 
+      />
     </aside>
   );
 }
